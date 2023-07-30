@@ -26,7 +26,6 @@
             {{ Form::date('fecha_fin_productiva', $ficha->fecha_fin_productiva, ['class' => 'form-control' . ($errors->has('fecha_fin_productiva') ? ' is-invalid' : '')]) }}
             {!! $errors->first('fecha_fin_productiva', '<div class="invalid-feedback">:message</div>') !!}
         </div>
-
         <div class="form-group">
             {{ Form::label('modalidad') }}
             {{ Form::select('modalidad', ['Presencial' => 'Presencial', 'Virtual' => 'Virtual'], $ficha->modalidad, ['class' => 'form-control' . ($errors->has('modalidad') ? ' is-invalid' : '')]) }}
@@ -38,14 +37,19 @@
             {!! $errors->first('jornada', '<div class="invalid-feedback">:message</div>') !!}
         </div>
         <div class="form-group">
-            {{ Form::label('gru_programa') }}
-            {{ Form::select('gru_programa', $programas, $ficha->gru_programa, ['class' => 'form-control' . ($errors->has('gru_programa') ? ' is-invalid' : '')]) }}
+            {{ Form::label('gru_programa', 'Programa') }}
+            {{ Form::select('gru_programa', $programas, $ficha->gru_programa, ['class' => 'form-control' . ($errors->has('gru_programa') ? ' is-invalid' : ''), 'placeholder' => 'Seleccione un programa']) }}
             {!! $errors->first('gru_programa', '<div class="invalid-feedback">:message</div>') !!}
         </div>
 
+        <div class="form-group">
+            {{ Form::label('instructor_cargo', 'Instructor Cargo') }}
+            {{ Form::select('instructor_cargo', $instructores, $ficha->instructor_cargo ?? null, ['class' => 'form-control' . ($errors->has('instructor_cargo') ? ' is-invalid' : ''), 'placeholder' => 'Seleccione un instructor']) }}
+            {!! $errors->first('instructor_cargo', '<div class="invalid-feedback">:message</div>') !!}
+        </div>
+
     </div>
-    <br>
     <div class="box-footer mt20">
-        <button class="btn btn-primary">{{ __('Submit') }}</button>
+        <button type="submit" class="btn btn-primary">{{ __('Submit') }}</button>
     </div>
 </div>

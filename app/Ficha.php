@@ -16,31 +16,27 @@ use Illuminate\Database\Eloquent\Model;
  * @property $modalidad
  * @property $jornada
  * @property $gru_programa
+ * @property $instructor_cargo
  * @property $created_at
  * @property $updated_at
  *
  * @property Aprendice[] $aprendices
+ * @property Instructore $instructore
  * @property Programa $programa
  * @package App
  * @mixin \Illuminate\Database\Eloquent\Builder
  */
 class Ficha extends Model
 {
-    protected $attributes = [
-        'gru_programa' => null, // Establece el valor predeterminado como nulo
-    ];
-
-
-
+    
     static $rules = [
-        'no_ficha' => 'required',
-        'fecha_inicio_lectiva' => 'required',
-        'fecha_fin_lectiva' => 'required',
-        'fecha_inicio_productiva' => 'required',
-        'fecha_fin_productiva' => 'required',
-        'modalidad' => 'required',
-        'jornada' => 'required',
-        'gru_programa' => 'required',
+		'no_ficha' => 'required',
+		'fecha_inicio_lectiva' => 'required',
+		'fecha_fin_lectiva' => 'required',
+		'fecha_inicio_productiva' => 'required',
+		'fecha_fin_productiva' => 'required',
+		'modalidad' => 'required',
+		'jornada' => 'required',
     ];
 
     protected $perPage = 20;
@@ -50,7 +46,7 @@ class Ficha extends Model
      *
      * @var array
      */
-    protected $fillable = ['no_ficha', 'fecha_inicio_lectiva', 'fecha_fin_lectiva', 'fecha_inicio_productiva', 'fecha_fin_productiva', 'modalidad', 'jornada', 'gru_programa'];
+    protected $fillable = ['no_ficha','fecha_inicio_lectiva','fecha_fin_lectiva','fecha_inicio_productiva','fecha_fin_productiva','modalidad','jornada','gru_programa','instructor_cargo'];
 
 
     /**
@@ -58,10 +54,17 @@ class Ficha extends Model
      */
     public function aprendices()
     {
-        return $this->hasMany(Aprendice::class, 'ficha_id');
+        return $this->hasMany('App\Aprendice', 'ficha_id', 'id');
     }
-
-
+    
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function instructore()
+    {
+        return $this->hasOne('App\Instructore', 'id', 'instructor_cargo');
+    }
+    
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
@@ -69,4 +72,6 @@ class Ficha extends Model
     {
         return $this->hasOne('App\Programa', 'id', 'gru_programa');
     }
+    
+
 }

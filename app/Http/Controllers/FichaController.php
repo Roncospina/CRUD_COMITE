@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Instructore;
 use App\Programa;
 use App\Ficha;
 use Illuminate\Http\Request;
@@ -32,10 +33,19 @@ class FichaController extends Controller
      */
     public function create()
     {
+        $instructores = Instructore::all()->map(function ($instructor) {
+            return [
+                'id' => $instructor->id,
+                'nombre_completo' => $instructor->nombres . ' ' . $instructor->apellidos,
+            ];
+        })->pluck('nombre_completo', 'id');
+
         $ficha = new Ficha();
         $programas = Programa::pluck('nombre', 'id');
-        return view('ficha.create', compact('ficha', 'programas'));
+        return view('ficha.create', compact('ficha', 'programas', 'instructores'));
     }
+
+
 
     /**
      * Store a newly created resource in storage.
@@ -76,7 +86,16 @@ class FichaController extends Controller
     {
         $ficha = Ficha::find($id);
         $programas = Programa::pluck('nombre', 'id');
-        return view('ficha.edit', compact('ficha','programas'));
+
+        // Obtener los instructores y construir el array con el nombre completo
+        $instructores = Instructore::all()->map(function ($instructor) {
+            return [
+                'id' => $instructor->id,
+                'nombre_completo' => $instructor->nombres . ' ' . $instructor->apellidos,
+            ];
+        })->pluck('nombre_completo', 'id');
+
+        return view('ficha.edit', compact('ficha', 'programas', 'instructores'));
     }
 
     /**

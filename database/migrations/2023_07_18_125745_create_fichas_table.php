@@ -22,6 +22,8 @@ return new class extends Migration
             $table->string('jornada', 45);
             $table->unsignedBigInteger('gru_programa')->nullable();
             $table->foreign('gru_programa')->references('id')->on('programa');
+            $table->unsignedBigInteger('instructor_cargo')->nullable();
+            $table->foreign('instructor_cargo')->references('id')->on('instructores');
             $table->timestamps();
         });
     }

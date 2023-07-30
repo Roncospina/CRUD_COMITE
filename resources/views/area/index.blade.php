@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('template_title')
-    Ficha
+    Area
 @endsection
 
 @section('content')
@@ -13,11 +13,11 @@
                         <div style="display: flex; justify-content: space-between; align-items: center;">
 
                             <span id="card_title">
-                                {{ __('Ficha') }}
+                                {{ __('Area') }}
                             </span>
 
                              <div class="float-right">
-                                <a href="{{ route('ficha.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
+                                <a href="{{ route('area.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
                                   {{ __('Create New') }}
                                 </a>
                               </div>
@@ -36,38 +36,22 @@
                                     <tr>
                                         <th>No</th>
                                         
-										<th>No Ficha</th>
-										<th>Fecha Inicio Lectiva</th>
-										<th>Fecha Fin Lectiva</th>
-										<th>Fecha Inicio Productiva</th>
-										<th>Fecha Fin Productiva</th>
-										<th>Modalidad</th>
-										<th>Jornada</th>
-										<th>Gru Programa</th>
-										<th>Instructor Cargo</th>
+										<th>Nombre</th>
 
                                         <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($fichas as $ficha)
+                                    @foreach ($areas as $area)
                                         <tr>
                                             <td>{{ ++$i }}</td>
                                             
-											<td>{{ $ficha->no_ficha }}</td>
-											<td>{{ $ficha->fecha_inicio_lectiva }}</td>
-											<td>{{ $ficha->fecha_fin_lectiva }}</td>
-											<td>{{ $ficha->fecha_inicio_productiva }}</td>
-											<td>{{ $ficha->fecha_fin_productiva }}</td>
-											<td>{{ $ficha->modalidad }}</td>
-											<td>{{ $ficha->jornada }}</td>
-											<td>{{ $ficha->programa->nombre }}</td>
-											<td>{{ $ficha->instructore->nombres . ' ' . $ficha->instructore->apellidos }}</td>
+											<td>{{ $area->nombre }}</td>
 
                                             <td>
-                                                <form action="{{ route('ficha.destroy',$ficha->id) }}" method="POST">
-                                                    <a class="btn btn-sm btn-primary " href="{{ route('ficha.show',$ficha->id) }}"><i class="fa fa-fw fa-eye"></i> {{ __('Show') }}</a>
-                                                    <a class="btn btn-sm btn-success" href="{{ route('ficha.edit',$ficha->id) }}"><i class="fa fa-fw fa-edit"></i> {{ __('Edit') }}</a>
+                                                <form action="{{ route('area.destroy',$area->id) }}" method="POST">
+                                                    <a class="btn btn-sm btn-primary " href="{{ route('area.show',$area->id) }}"><i class="fa fa-fw fa-eye"></i> {{ __('Show') }}</a>
+                                                    <a class="btn btn-sm btn-success" href="{{ route('area.edit',$area->id) }}"><i class="fa fa-fw fa-edit"></i> {{ __('Edit') }}</a>
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> {{ __('Delete') }}</button>
@@ -80,7 +64,7 @@
                         </div>
                     </div>
                 </div>
-                {!! $fichas->links() !!}
+                {!! $areas->links() !!}
             </div>
         </div>
     </div>

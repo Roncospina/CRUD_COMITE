@@ -50,7 +50,11 @@
                         </div>
                         <div class="form-group">
                             <strong>Gru Programa:</strong>
-                            {{ $ficha->programa->nombre }}
+                            {{ $ficha->gru_programa }}
+                        </div>
+                        <div class="form-group">
+                            <strong>Instructor Cargo:</strong>
+                            {{ $ficha->instructor_cargo }}
                         </div>
 
                     </div>

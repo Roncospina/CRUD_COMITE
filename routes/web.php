@@ -27,9 +27,10 @@ Route::middleware([
     })->name('dashboard');
 });
 
+Route::resource('instructore', App\Http\Controllers\InstructoreController::class);
 Route::resource('programa',App\Http\Controllers\ProgramaController::class);
 Route::resource('ficha',App\Http\Controllers\FichaController::class);
 Route::resource('aprendice', App\Http\Controllers\AprendiceController::class);
-
+Route::resource('area', App\Http\Controllers\AreaController::class);
 
 
